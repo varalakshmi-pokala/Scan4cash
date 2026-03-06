@@ -1,0 +1,29 @@
+n=6
+for i in range(n):
+    for j in range(n):
+        print(j+1,end=" ")
+    print()
+print("-----------------")
+
+n=6
+for i in range(n):
+    for j in range(n):
+        print(i+1,end=" ")
+    print()
+print("-----------------")
+
+n=6
+for i in range(n):
+    for j in range(n):
+        print(chr(67),end=" ")
+    print()
+print("-----------------")
+
+n=6
+for i in range(n):
+    alpha=65
+    for j in range(n):
+        print(chr(alpha),end=" ")
+        alpha+=1
+    print()
+print("-----------------")
