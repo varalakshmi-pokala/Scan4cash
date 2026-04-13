@@ -2,233 +2,415 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scan4Cash</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                url('cash for trash.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-        
-
-        h1 {
-            font-size: 30px;
-        }
-
-        .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 30px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 10px;
-}
-
-        button {
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .welcome-container {
-            text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        #about-us {
-            display: none;
-            margin-top: 20px;
-        }
-
-        #image-preview {
-            max-width: 200px;
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan4Cash - Turn Your Waste Into Cash</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <h4>Scan4Cash</h4>
+        </a>
+        <ul class="nav-links">
+            <li><a onclick="scrollToSection('hero')">Home</a></li>
+            <li><a onclick="scrollToSection('about')">About</a></li>
+            <li><a onclick="scrollToSection('services')">Services</a></li>
+            <li><a onclick="scrollToSection('faq')">FAQs</a></li>
+            <li><a onclick="scrollToSection('contact')">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Welcome -->
-    <div class="welcome-container" id="welcome-page">
-        <h1 style="color:black;font-style:italic;">Welcome to Scan4Cash</h1>
+    <!-- Hero Section with SINGLE IMAGE CAROUSEL -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <!-- ADD THIS -->
+            <div class="market-btn-container">
+                <button class="market-btn" onclick="openModal('marketModal')">
+                    💰 See Market Price
+                </button>
+            </div>
+            <h1>Scan4Cash</h1>
+            <p class="tagline">Turn your waste into cash</p>
+            <p class="quote">"Clean your space, fill your pocket.
+                Request pickup now!"</p>
+            <button class="cta-button" onclick="openModal('registrationModal')">
+                <i class="fas fa-truck"></i> Request Pickup
+            </button>
 
-        <button onclick="showRegistrationPage()">Go to Registration</button>
-        <button onclick="toggleAboutUs()">About Us</button>
+        </div>
 
-        <div id="about-us" class="container">
-            <h2>About Us</h2>
-            <p>We are Warriors ♻️ turning trash into cash while protecting the environment.</p>
+
+        <!-- SINGLE RECTANGLE CAROUSEL -->
+        <div class="hero-images">
+            <div class="carousel-container">
+                <!-- 5 Recycling Images - ONE AT A TIME -->
+                <img src="1.jpg" alt="Plastic Bottles Recycling" class="carousel-image active fade"
+                    data-animation="fade">
+                <img src="2.jpg" alt="Waste Collection" class="carousel-image slide-left" data-animation="slide-left">
+                <img src="3.jpg" alt="Colorful Plastic Sorting" class="carousel-image slide-right"
+                    data-animation="slide-right">
+                <img src="4.jpg" alt="Paper Recycling" class="carousel-image zoom-fade" data-animation="zoom-fade">
+                <img src="5.jpg" alt="Eco Friendly Plant" class="carousel-image fade" data-animation="fade">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">About Scan4Cash</h2>
+
+        <!-- NEW PARAGRAPH -->
+        <p class="about-intro">
+            <b>Scan4Cash</b> is an eco-friendly initiative to keep our villages and cities clean while helping people
+            earn money from recyclable waste.
+            Instead of throwing plastic, metal, glass, or old clothes, users can
+            upload their waste details and sell them to collectors. This reduces
+            pollution, protects animals, and promotes recycling. 
+            <br>Minimum 500g required per submission.
+        </p>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Mission</h3>
+                <p>Our mission is to keep the environment clean by helping people recycle waste and earn money
+                    sustainably.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-eye"></i>
+                <h3>Vision</h3>
+                <p>A cleaner planet where every piece of waste becomes an opportunity for income and sustainability.
+                </p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-heart"></i>
+                <h3>Values</h3>
+                <p>Sustainability, Community, Innovation, and Financial Empowerment through responsible waste
+                    management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">How It Works</h2>
+
+        <div class="services-grid">
+
+            <div class="service-card" data-number="1">
+                <i class="fas fa-qrcode"></i>
+                <h3>Scan or Visit</h3>
+                <p>Scan the QR or visit the Scan4Cash website.</p>
+            </div>
+
+            <div class="service-card" data-number="2">
+                <i class="fas fa-mouse-pointer"></i>
+                <h3>Request Pickup</h3>
+                <p>Click "Request Pickup" to get started instantly.</p>
+            </div>
+
+            <div class="service-card" data-number="3">
+                <i class="fas fa-upload"></i>
+                <h3>Upload Details</h3>
+                <p>Fill your details and upload waste info with photos.</p>
+            </div>
+
+            <div class="service-card" data-number="4">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Schedule Pickup</h3>
+                <p>Choose your preferred date, time, and location.</p>
+            </div>
+
+            <div class="service-card" data-number="5">
+                <i class="fas fa-rupee-sign"></i>
+                <h3>Get Paid</h3>
+                <p>Receive payment after waste is collected and processed.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What types of waste can I recycle?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept plastics, paper, cardboard, metals, glass, electronics, and organic waste. Check our
+                        guidelines for specific items.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I get paid?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Payment is processed within 48 hours after collection verification via mobile money or bank
+                        transfer.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is there a minimum waste quantity?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, minimum of 5kg for most materials. Larger quantities earn better rates.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you pick up from anywhere?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We service urban and suburban areas. Use our location detector to check availability in your
+                        area.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form" onsubmit="submitContact(event)">
+            <div class="form-group">
+                <input type="text" id="contactName" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="contactEmail" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="contactPhone" placeholder="Your Phone" required>
+            </div>
+            <div class="form-group">
+                <textarea id="contactMessage" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Scan4Cash. Turning waste into wealth. All rights reserved.</p>
+        <p><a href="#" onclick="scrollToSection('hero')" style="color: #ffd700;">Back to Top ↑</a></p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Modals -->
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAllModals()">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Register for Pickup</h2>
+            <form id="registrationForm" onsubmit="submitRegistration(event)">
+                <div class="form-group">
+                    <input type="text" id="userName" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="userPhone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="userEmail" placeholder="Email Address" required>
+                </div>
+                <button type="submit" class="btn-primary">Next Step →</button>
+            </form>
         </div>
     </div>
 
-    <!-- Registration -->
-    <div class="container" id="registration-page" style="display:none;">
-        <h1>Register</h1>
+    <div class="modal" id="uploadModal">
+        <div class="modal-content" style="max-height: 90vh;">
+            <span class="close" onclick="closeAllModals()">&times;</span>
+            <h2> Upload Waste Details</h2>
 
-        <input id="name" placeholder="Name" required>
-        <input id="email" type="email" placeholder="Email" required>
-        <input id="phone" placeholder="Phone" required>
+            <form id="uploadForm" onsubmit="submitUpload(event)">
 
-        <button onclick="validateForm()">Submit</button>
-        <button onclick="goBack()">Back</button>
+                <!-- Waste Type -->
+                <div class="form-group">
+                    <label>Waste Type *</label>
+                    <select id="wasteType" required>
+                        <option value="">Select waste type</option>
+                        <option value="plastic">♻️ Plastic</option>
+                        <option value="metal">🔩 Metal</option>
+                        <option value="paper">📄 Paper/Cardboard</option>
+                        <option value="glass">🫙 Glass</option>
+                        <option value="electronics">💻 Electronics</option>
+                    </select>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="wasteDesc" rows="3" placeholder="Describe quantity, condition, etc."
+                        required></textarea>
+                </div>
+
+                <!-- Pickup Date -->
+                <div class="form-group">
+                    <label>Pickup Date *</label>
+                    <input type="date" id="pickupDate" required>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label>Location *</label>
+                    <div class="location-input-group">
+                        <input type="text" id="pickupLocation" placeholder="Enter your full address manually" required>
+                        <button type="button" class="btn-location-detect" onclick="detectCurrentLocation()">
+                            📍 Detect Current Location
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Time -->
+                <div class="form-group">
+                    <label>Pickup Time (Optional)</label>
+                    <select id="pickupTime">
+                        <option value="">Any time</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="18:00">06:00 PM</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+
+                <!-- Photo -->
+                <div class="form-group">
+                    <label>Upload Photo *</label>
+
+                    <div class="upload-buttons">
+                        <label class="upload-btn">
+                            📁 Choose File
+                            <input type="file" id="wastePhoto" accept="image/*" hidden>
+                        </label>
+
+                        <label class="upload-btn">
+                            📷 Take Photo
+                            <input type="file" id="cameraPhoto" accept="image/*" capture="environment" hidden>
+                        </label>
+                        
+                    </div>
+                   <button type="button" onclick="removeImage()">🗑️ Remove Image</button>
+                    <!-- Preview -->
+                    <img id="imagePreview" style="display:none; margin-top:10px; width:100%; border-radius:10px;" />
+                </div>
+
+                <!-- Buttons -->
+                <div style="display:flex; gap:10px;">
+                    <button type="button" onclick="goBackToRegistration()" class="btn-primary">⬅ Back</button>
+                    <button type="submit" class="btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 
-    <!-- Upload -->
-    <div class="container" id="upload-page" style="display:none;">
-        <h1>Upload Waste</h1>
-
-        <textarea id="waste-description" placeholder="Description"></textarea>
-        <input type="date" id="pickup-date">
-        <input id="location" placeholder="Location">
-
-        <input type="file" id="file-upload" onchange="handleFileUpload()">
-
-        <img id="image-preview">
-
-        <button onclick="submitRequest()">Submit Request</button>
-        <button onclick="goBack()">Back</button>
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAllModals()">&times;</span>
+            <h2><i class="fas fa-check-circle" style="color: #28a745;"></i> Request Successful!</h2>
+            <div style="text-align: center; padding: 2rem;">
+                <p>Your pickup request has been registered successfully!</p>
+                <p><strong>Reference ID:</strong> <span id="referenceId"></span></p>
+                <p>Our team will contact you within 24 hours to confirm pickup details.</p>
+                <button onclick="closeAllModals()" class="btn-primary">Done</button>
+            </div>
+        </div>
     </div>
+    <div id="marketModal" class="modal">
+            <div class="modal-content" style="max-width: 900px;">
+                <span class="close" onclick="closeAllModals()">&times;</span>
+                <h2 style="text-align:center; margin-bottom:15px;">💰 Market Prices </h2>
+                <h5 style="text-align:center; margin-bottom:15px;">Minimum Collection: 500g </h5>
 
-    <!-- End -->
-    <div class="container" id="end-page" style="display:none;">
-        <h1>Thank You ✅</h1>
-        <button onclick="showWelcomePage()">Home</button>
-    </div>
+
+                <table class="market-table">
+                    <tr>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>₹ / 500g</th>
+                    </tr>
+
+                    <!-- Plastic -->
+                    <tr>
+                        <td rowspan="3">Plastic</td>
+                        <td>PET Bottles</td>
+                        <td>₹20</td>
+                    </tr>
+                    <tr>
+                        <td>Hard Plastic</td>
+                        <td>₹15</td>
+                    </tr>
+                    <tr>
+                        <td>Soft Plastic</td>
+                        <td>₹5</td>
+                    </tr>
+
+                    <!-- Metal -->
+                    <tr>
+                        <td rowspan="4">Metal</td>
+                        <td>Iron</td>
+                        <td>₹15</td>
+                    </tr>
+                    <tr>
+                        <td>Aluminium</td>
+                        <td>₹65</td>
+                    </tr>
+                    <tr>
+                        <td>Brass</td>
+                        <td>₹200</td>
+                    </tr>
+                    <tr>
+                        <td>Copper</td>
+                        <td>₹300</td>
+                    </tr>
+
+                    <!-- Glass -->
+                    <tr>
+                        <td>Glass</td>
+                        <td>Bottles/Jars</td>
+                        <td>₹2</td>
+                    </tr>
+
+                    <!-- Clothes -->
+                    <tr>
+                        <td rowspan="2">Clothes</td>
+                        <td>Mixed</td>
+                        <td>₹2</td>
+                    </tr>
+                    <tr>
+                        <td>Reusable</td>
+                        <td>₹4</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
 
-<script>
-let uploadedImageUrl = "";
-const historyStack = [];
 
-/* ---------- Navigation ---------- */
-
-function hideAll() {
-    ["welcome-page","registration-page","upload-page","end-page"]
-    .forEach(id => document.getElementById(id).style.display="none");
-}
-
-function showWelcomePage(){
-    hideAll();
-    document.getElementById("welcome-page").style.display="flex";
-    historyStack.push("welcome-page");
-}
-
-function showRegistrationPage(){
-    hideAll();
-    document.getElementById("registration-page").style.display="block";
-    historyStack.push("registration-page");
-}
-
-function showUploadPage(){
-    hideAll();
-    document.getElementById("upload-page").style.display="block";
-    historyStack.push("upload-page");
-}
-
-function showEndPage(){
-    hideAll();
-    document.getElementById("end-page").style.display="block";
-}
-
-function goBack(){
-    historyStack.pop();
-    const last = historyStack.pop();
-    if(last==="welcome-page") showWelcomePage();
-    if(last==="registration-page") showRegistrationPage();
-}
-
-/* ---------- Form ---------- */
-
-function validateForm(){
-    const name=document.getElementById("name").value;
-    const email=document.getElementById("email").value;
-    const phone=document.getElementById("phone").value;
-
-    if(!name||!email||!phone){
-        alert("Fill all fields");
-        return;
-    }
-
-    showUploadPage();
-}
-
-/* ---------- Image Preview ---------- */
-
-function handleFileUpload(){
-    const file=document.getElementById("file-upload").files[0];
-    if(!file) return;
-
-    uploadedImageUrl=URL.createObjectURL(file);
-
-    const img=document.getElementById("image-preview");
-    img.src=uploadedImageUrl;
-    img.style.display="block";
-}
-
-/* ---------- Submit ---------- */
-
-async function submitRequest(){
-
-    const formData = new FormData();
-
-    formData.append("name", document.getElementById("name").value);
-    formData.append("email", document.getElementById("email").value);
-    formData.append("phone", document.getElementById("phone").value);
-    formData.append("description", document.getElementById("waste-description").value);
-    formData.append("date", document.getElementById("pickup-date").value);
-    formData.append("location", document.getElementById("location").value);
-
-    const file = document.getElementById("file-upload").files[0];
-    if(file) formData.append("image", file);
-
-    try{
-        await fetch("/add-request",{
-            method:"POST",
-            body:formData
-        });
-
-        alert("Request submitted successfully ✅");
-        showEndPage();
-
-    }catch(err){
-        alert("Backend server not running ❌");
-        console.error(err);
-    }
-}
-/* ---------- About ---------- */
-
-function toggleAboutUs(){
-    const el=document.getElementById("about-us");
-    el.style.display=el.style.display==="block"?"none":"block";
-}
-
-showWelcomePage();
-</script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
