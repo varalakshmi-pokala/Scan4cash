@@ -194,7 +194,7 @@ async function submitUpload(event) {
     formData.append("image", imageFile);
 
     try {
-        const response = await fetch("http://localhost:5000/api/request", {
+        const response = await fetch("https://scan2clean.onrender.com/add-request", {
             method: "POST",
             body: formData
         });
@@ -241,7 +241,7 @@ async function submitUpload(event) {
         document.getElementById('referenceId').textContent = refId;
         openModal('confirmationModal');
     }, 300);
-}
+
 
 // ================== LOCATION ==================
 function detectCurrentLocation() {
