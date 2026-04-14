@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setInterval(nextImage, 4000);
 
-
     // ================== IMAGE PREVIEW ==================
     const fileInput = document.getElementById('wastePhoto');
     const preview = document.getElementById('imagePreview');
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // ================== DATE LIMIT ==================
     const today = new Date().toISOString().split('T')[0];
     const pickupDate = document.getElementById('pickupDate');
@@ -56,28 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
         pickupDate.setAttribute('min', today);
     }
 
-
-    // ================== SCROLL ANIMATION ==================
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-
-    document.querySelectorAll('.about-card, .service-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = '0.6s';
-        observer.observe(card);
-    });
-
 });
 
 
-// ================== SCROLL FUNCTIONS ==================
+// ================== SCROLL ==================
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
@@ -151,7 +131,7 @@ function submitRegistration(event) {
 }
 
 
-// ================== SUBMIT REQUEST ==================
+// ================== FINAL SUBMIT (MAIN FUNCTION) ==================
 async function submitUpload(event) {
     event.preventDefault();
 
@@ -174,7 +154,7 @@ async function submitUpload(event) {
     formData.append("image", imageFile);
 
     try {
-        const response = await fetch("/add-request", {   // ✅ FIXED
+        const response = await fetch("http://localhost:10000/add-request", {
             method: "POST",
             body: formData
         });
@@ -227,7 +207,6 @@ function removeImage() {
     const preview = document.getElementById('imagePreview');
     preview.src = "";
     preview.style.display = "none";
-
     document.getElementById('wastePhoto').value = "";
 }
 

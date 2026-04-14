@@ -10,28 +10,33 @@ const app = express();
 /* ========= Middlewares ========= */
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
 
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
+/* ========= STATIC FILES (VERY IMPORTANT FIX) ========= */
+app.use(express.static(path.join(__dirname, "../public")));
+
+/* ========= Upload Folder ========= */
+const uploadPath = path.join(__dirname, "uploads");
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath);
 }
 
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(uploadPath));
 
-/* ========= Mongo ========= */
+/* ========= MongoDB ========= */
 const MONGO_URL = process.env.MONGO_URL;
 
-mongoose
-  .connect(MONGO_URL)
+mongoose.connect(MONGO_URL)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
 /* ========= Multer ========= */
 const storage = multer.diskStorage({
-  destination: "uploads/",
+  destination: (req, file, cb) => cb(null, uploadPath),
   filename: (req, file, cb) =>
     cb(null, Date.now() + "-" + file.originalname),
 });
+
 const upload = multer({ storage });
 
 /* ========= Schema ========= */
@@ -54,7 +59,7 @@ const Request = mongoose.model(
 
 /* ========= Routes ========= */
 
-// Serve frontend
+// Home page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
@@ -62,28 +67,35 @@ app.get("/", (req, res) => {
 // Add request
 app.post("/add-request", upload.single("image"), async (req, res) => {
   try {
-    const data = await Request.create({
-      ...req.body,
+    const newRequest = await Request.create({
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      description: req.body.description,
+      date: req.body.date,
+      location: req.body.location,
       image: req.file ? req.file.filename : "",
     });
 
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json({ success: true, data: newRequest });
+
+  } catch (error) {
+    console.error("❌ ERROR:", error);
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
-// Get all
+// Get all requests
 app.get("/requests", async (req, res) => {
   try {
     const data = await Request.find().sort({ createdAt: -1 });
     res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Fetch error" });
   }
 });
 
-// Update
+// Update status
 app.put("/update/:id", async (req, res) => {
   try {
     await Request.findByIdAndUpdate(req.params.id, {
@@ -91,13 +103,14 @@ app.put("/update/:id", async (req, res) => {
     });
 
     res.json({ message: "Updated" });
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Update failed" });
   }
 });
 
-/* ========= Start ========= */
-const PORT = process.env.PORT || 5000;
+/* ========= START SERVER ========= */
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
   console.log("🔥 Server running on", PORT);
