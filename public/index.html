@@ -237,7 +237,7 @@
             <span class="close" onclick="closeAllModals()">&times;</span>
             <h2> Upload Waste Details</h2>
 
-            <form id="uploadForm" onsubmit="submitUpload(event)">
+            <form id="uploadForm" onsubmit="submitUpload(event)" enctype="multipart/form-data">
 
                 <!-- Waste Type -->
                 <div class="form-group">
@@ -302,12 +302,12 @@
                     <div class="upload-buttons">
                         <label class="upload-btn">
                             📁 Choose File
-                            <input type="file" id="wastePhoto" accept="image/*" hidden>
+                            <input type="file" id="wastePhoto" name="image" accept="image/*" hidden>
                         </label>
 
                         <label class="upload-btn">
                             📷 Take Photo
-                            <input type="file" id="cameraPhoto" accept="image/*" capture="environment" hidden>
+                            <input type="file" id="cameraPhoto" name="image" accept="image/*" capture="environment" hidden>
                         </label>
                         
                     </div>

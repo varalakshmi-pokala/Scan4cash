@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ================== IMAGE PREVIEW ==================
     const fileInput = document.getElementById('wastePhoto');
+    const cameraInput = document.getElementById('cameraPhoto');
     const preview = document.getElementById('imagePreview');
 
     function showPreview(file) {
@@ -47,13 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if (cameraInput) {
+        cameraInput.addEventListener('change', (e) => {
+            showPreview(e.target.files[0]);
+        });
+    }
+
     // ================== DATE LIMIT ==================
     const today = new Date().toISOString().split('T')[0];
     const pickupDate = document.getElementById('pickupDate');
     if (pickupDate) {
         pickupDate.setAttribute('min', today);
     }
-
 });
 
 
@@ -131,7 +137,7 @@ function submitRegistration(event) {
 }
 
 
-// ================== FINAL SUBMIT (MAIN FUNCTION) ==================
+// ================== FINAL SUBMIT ==================
 async function submitUpload(event) {
     event.preventDefault();
 
@@ -154,12 +160,16 @@ async function submitUpload(event) {
     formData.append("image", imageFile);
 
     try {
-        const response = await fetch("http://localhost:10000/add-request", {
+        const response = await fetch("/add-request", {
             method: "POST",
             body: formData
         });
 
         const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Server error");
+        }
 
         closeAllModals();
 
@@ -170,8 +180,35 @@ async function submitUpload(event) {
         }, 300);
 
     } catch (error) {
-        alert("Server Error ❌");
+        alert("❌ Error: " + error.message);
         console.error(error);
+    }
+}
+
+
+// ================== CONTACT FORM ==================
+async function submitContact(e) {
+    e.preventDefault();
+
+    const data = {
+        name: document.getElementById("contactName").value,
+        email: document.getElementById("contactEmail").value,
+        phone: document.getElementById("contactPhone").value,
+        message: document.getElementById("contactMessage").value
+    };
+
+    try {
+        await fetch("/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        alert("Message sent successfully ✅");
+
+    } catch (err) {
+        alert("Failed to send message ❌");
+        console.error(err);
     }
 }
 
