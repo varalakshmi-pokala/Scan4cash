@@ -671,3 +671,68 @@
 .market-table tr:hover {
     background: #f8f9fa;
 }
+/* ================== MOBILE RESPONSIVE ================== */
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+    .nav-links {
+        display: none;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-images {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .carousel-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ABOUT */
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* SERVICES */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* FAQ */
+    .faq-container {
+        padding: 0 10px;
+    }
+
+    /* CONTACT */
+    .contact-form {
+        padding: 10px;
+    }
+
+    /* MODAL */
+    .modal-content {
+        width: 90%;
+        margin: 10% auto;
+    }
+
+    /* BUTTONS */
+    button {
+        width: 100%;
+    }
+}
