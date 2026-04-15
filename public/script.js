@@ -163,8 +163,10 @@ const imageFile = fileInput.files[0] || cameraInput.files[0];
     formData.append("name", userData.name);
     formData.append("phone", userData.phone);
     formData.append("email", userData.email);
+    formData.append("wasteType", document.getElementById('wasteType').value);
     formData.append("description", document.getElementById('wasteDesc').value);
     formData.append("date", document.getElementById('pickupDate').value);
+    formData.append("time", document.getElementById('pickupTime').value);
     formData.append("location", document.getElementById('pickupLocation').value);
     formData.append("image", imageFile);
 
@@ -332,3 +334,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+const Contact = mongoose.model(
+  "Contact",
+  new mongoose.Schema({
+    name: String,
+    email: String,
+    message: String
+  }, { timestamps: true })
+);
+async function submitContact(event) {
+    event.preventDefault();
+
+    const data = {
+        name: document.getElementById("contactName").value,
+        email: document.getElementById("contactEmail").value,
+        message: document.getElementById("contactMessage").value
+    };
+
+    await fetch("/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    alert("Message sent ✅");
+}

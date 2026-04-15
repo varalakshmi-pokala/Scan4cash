@@ -45,14 +45,15 @@ const Request = mongoose.model(
     name: String,
     email: String,
     phone: String,
+    wasteType: String,   // ✅ NEW
     description: String,
     date: String,
+    time: String,        // ✅ NEW
     location: String,
     image: String,
     status: { type: String, default: "Pending" }
   }, { timestamps: true })
-);
-
+); 
 /* ========= Routes ========= */
 
 // Home
@@ -71,15 +72,16 @@ app.post("/add-request", upload.single("image"), async (req, res) => {
     }
 
     const newRequest = await Request.create({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      description: req.body.description,
-      date: req.body.date,
-      location: req.body.location,
-      image: req.file.filename,
-    });
-
+  name: req.body.name,
+  email: req.body.email,
+  phone: req.body.phone,
+  wasteType: req.body.wasteType,  // ✅
+  description: req.body.description,
+  date: req.body.date,
+  time: req.body.time,            // ✅
+  location: req.body.location,
+  image: req.file.filename,
+});
     console.log("✅ Saved:", newRequest);
 
     res.json({ success: true });
@@ -110,4 +112,13 @@ app.get("/admin", (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   await Request.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
+});
+app.post("/contact", async (req, res) => {
+  const data = await Contact.create(req.body);
+  res.json(data);
+});
+
+app.get("/contacts", async (req, res) => {
+  const data = await Contact.find().sort({ createdAt: -1 });
+  res.json(data);
 });
