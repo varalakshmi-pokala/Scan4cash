@@ -826,37 +826,3 @@
         text-align: center;
     }
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-/* Icon box */
-.logo-icon-box {
-    width: 40px;
-    height: 40px;
-    
-    color: #dcdedd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-/* Text */
-.logo-text {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    letter-spacing: 0.5px;
-}
-
-/* Hover effect */
-.logo:hover {
-    transform: scale(1.04);
-}

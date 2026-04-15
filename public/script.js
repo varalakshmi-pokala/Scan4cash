@@ -298,3 +298,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ... rest of your existing code ...
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+
+        question.addEventListener('click', () => {
+
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('i');
+
+            // Close all other answers (optional)
+            document.querySelectorAll('.faq-answer').forEach(a => {
+                if (a !== answer) {
+                    a.classList.remove('active');
+                }
+            });
+
+            // Toggle current
+            answer.classList.toggle('active');
+
+            // Rotate icon
+            if (icon) {
+                icon.style.transform = answer.classList.contains('active')
+                    ? 'rotate(180deg)'
+                    : 'rotate(0deg)';
+            }
+        });
+
+    });
+
+});

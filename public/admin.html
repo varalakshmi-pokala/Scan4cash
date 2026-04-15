@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+        th { background: #28a745; color: white; }
+        img { width: 80px; }
+        button { padding: 5px 10px; margin: 2px; }
+    </style>
+</head>
+
+<body>
+
+<h2>📋 Scan4Cash Admin Dashboard</h2>
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+async function loadData() {
+    const res = await fetch("/requests");
+    const data = await res.json();
+
+    const table = document.querySelector("#dataTable tbody");
+    table.innerHTML = "";
+
+    data.forEach(item => {
+        const row = `
+        <tr>
+            <td>${item.name}</td>
+            <td>${item.phone}</td>
+            <td>${item.description}</td>
+            <td>${item.date}</td>
+            <td>${item.location}</td>
+            <td>
+                <img src="/uploads/${item.image}" />
+            </td>
+            <td>${item.status}</td>
+            <td>
+                <button onclick="updateStatus('${item._id}','Approved')">Approve</button>
+                <button onclick="updateStatus('${item._id}','Completed')">Done</button>
+            </td>
+        </tr>
+        `;
+        table.innerHTML += row;
+    });
+}
+
+async function updateStatus(id, status) {
+    await fetch("/update/" + id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+    });
+
+    loadData(); // refresh
+}
+
+loadData();
+</script>
+
+</body>
+</html>
