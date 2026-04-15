@@ -138,35 +138,7 @@
             loadData();
         }
 
-        // ================= LOAD CONTACTS =================
-        async function loadContacts() {
-            try {
-                const res = await fetch("/contacts");
-                const data = await res.json();
-
-                const table = document.querySelector("#contactTable tbody");
-                table.innerHTML = "";
-
-                data.forEach(item => {
-                    table.innerHTML += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>${item.email}</td>
-                        <td>${item.phone || "-"}</td>
-                        <td>${item.message}</td>
-                    </tr>
-                    `;
-                });
-
-            } catch (err) {
-                console.error("❌ Contact Load Error:", err);
-            }
-        }
-
-        // ================= INIT =================
-        loadData();
-        loadContacts();
-
+        
     </script>
 
 </body>

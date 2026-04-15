@@ -55,15 +55,7 @@ const Request = mongoose.model(
   }, { timestamps: true })
 ); 
 /* ========= Routes ========= */
-const Contact = mongoose.model(
-  "Contact",
-  new mongoose.Schema({
-    name: String,
-    email: String,
-    phone: String,   // 🔥 ADD THIS
-    message: String
-  }, { timestamps: true })
-);
+
 // Home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -121,8 +113,5 @@ app.delete("/delete/:id", async (req, res) => {
   await Request.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
 });
-app.post("/contact", async (req, res) => {
-  const data = await Contact.create(req.body);
-  res.json(data);
-});
+
 

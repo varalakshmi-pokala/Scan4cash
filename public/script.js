@@ -197,31 +197,7 @@ const imageFile = fileInput.files[0] || cameraInput.files[0];
 }
 
 
-// ================== CONTACT FORM ==================
-async function submitContact(e) {
-    e.preventDefault();
 
-    const data = {
-        name: document.getElementById("contactName").value,
-        email: document.getElementById("contactEmail").value,
-        phone: document.getElementById("contactPhone").value,
-        message: document.getElementById("contactMessage").value
-    };
-
-    try {
-        await fetch("/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-
-        alert("Message sent successfully ✅");
-
-    } catch (err) {
-        alert("Failed to send message ❌");
-        console.error(err);
-    }
-}
 
 
 // ================== LOCATION ==================
@@ -360,12 +336,3 @@ async function submitContact(event) {
         alert("Error ❌");
     }
 }
-app.get("/contacts", async (req, res) => {
-  try {
-    const data = await Contact.find().sort({ createdAt: -1 });
-    res.json(data);
-  } catch (err) {
-    console.log("❌ Contact Fetch Error:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
