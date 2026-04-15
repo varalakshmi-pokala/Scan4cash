@@ -3,6 +3,7 @@
 
 <head>
     <title>Admin Dashboard</title>
+
     <style>
         body {
             font-family: Arial;
@@ -10,17 +11,15 @@
         }
 
         h2 {
-            margin-top: 30px;
+            margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
 
-        th,
-        td {
+        th, td {
             padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
@@ -48,7 +47,6 @@
 
     <h2>📋 Scan4Cash Admin Dashboard</h2>
 
-    <!-- ================= REQUEST TABLE ================= -->
     <table id="dataTable">
         <thead>
             <tr>
@@ -67,11 +65,10 @@
         </thead>
         <tbody></tbody>
     </table>
-<!-- ================= CONTACT TABLE ================= -->
 
     <script>
 
-        // ================= LOAD REQUESTS =================
+        // ================= LOAD DATA =================
         async function loadData() {
             try {
                 const res = await fetch("/requests");
@@ -103,7 +100,7 @@
                 });
 
             } catch (err) {
-                console.error("❌ Request Load Error:", err);
+                console.error("❌ Load Error:", err);
             }
         }
 
@@ -124,7 +121,9 @@
             loadData();
         }
 
-        
+        // ================= INIT =================
+        loadData();
+
     </script>
 
 </body>
