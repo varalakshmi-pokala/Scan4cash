@@ -334,14 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-const Contact = mongoose.model(
-  "Contact",
-  new mongoose.Schema({
-    name: String,
-    email: String,
-    message: String
-  }, { timestamps: true })
-);
+
 async function submitContact(event) {
     event.preventDefault();
 
@@ -351,11 +344,28 @@ async function submitContact(event) {
         message: document.getElementById("contactMessage").value
     };
 
-    await fetch("/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
+    try {
+        await fetch("/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    alert("Message sent ✅");
+        alert("Message sent ✅");
+
+    } catch (err) {
+        console.error(err);
+        alert("Error ❌");
+    }
 }
+app.get("/contacts", async (req, res) => {
+  try {
+    const data = await Contact.find().sort({ createdAt: -1 });
+    res.json(data);
+  } catch (err) {
+    console.log("❌ Contact Fetch Error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
