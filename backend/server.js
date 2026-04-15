@@ -55,7 +55,15 @@ const Request = mongoose.model(
   }, { timestamps: true })
 ); 
 /* ========= Routes ========= */
-
+const Contact = mongoose.model(
+  "Contact",
+  new mongoose.Schema({
+    name: String,
+    email: String,
+    phone: String,   // 🔥 ADD THIS
+    message: String
+  }, { timestamps: true })
+);
 // Home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -118,7 +126,3 @@ app.post("/contact", async (req, res) => {
   res.json(data);
 });
 
-app.get("/contacts", async (req, res) => {
-  const data = await Contact.find().sort({ createdAt: -1 });
-  res.json(data);
-});
