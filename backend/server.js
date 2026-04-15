@@ -101,3 +101,7 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log("🔥 Server running on", PORT);
 });
+
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin.html"));
+});
