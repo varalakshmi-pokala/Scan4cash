@@ -13,6 +13,7 @@ app.use(express.json());
 
 /* ========= STATIC ========= */
 app.use(express.static(path.join(__dirname, "../public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* ========= Upload Folder ========= */
 const uploadPath = path.join(__dirname, "uploads");
@@ -104,4 +105,9 @@ app.listen(PORT, () => {
 
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/admin.html"));
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  await Request.findByIdAndDelete(req.params.id);
+  res.json({ message: "Deleted" });
 });

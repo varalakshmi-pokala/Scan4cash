@@ -55,6 +55,7 @@ async function loadData() {
             <td>
                 <button onclick="updateStatus('${item._id}','Approved')">Approve</button>
                 <button onclick="updateStatus('${item._id}','Completed')">Done</button>
+                <button onclick="deleteReq('${item._id}')">Delete</button>
             </td>
         </tr>
         `;
@@ -73,6 +74,10 @@ async function updateStatus(id, status) {
 }
 
 loadData();
+async function deleteReq(id) {
+  await fetch("/delete/" + id, { method: "DELETE" });
+  loadData();
+}
 </script>
 
 </body>

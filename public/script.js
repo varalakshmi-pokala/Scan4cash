@@ -147,7 +147,10 @@ function submitRegistration(event) {
 async function submitUpload(event) {
     event.preventDefault();
 
-    const imageFile = document.getElementById('wastePhoto').files[0];
+    const fileInput = document.getElementById('wastePhoto');
+const cameraInput = document.getElementById('cameraPhoto');
+
+const imageFile = fileInput.files[0] || cameraInput.files[0];
 
     if (!imageFile) {
         alert("Please upload an image");
