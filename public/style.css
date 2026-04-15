@@ -840,3 +840,15 @@
     background: black;
     transform: scale(1.1);
 }
+.social-icons {
+    display: flex;
+    justify-content: center;  /* center horizontally */
+    align-items: center;
+    margin-top: 15px;
+}
+#contact {
+    text-align: center;
+}
+.social-icons a {
+    margin: 0 10px;
+}
