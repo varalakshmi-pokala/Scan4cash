@@ -11,18 +11,28 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <h4>Scan4Cash</h4>
-        </a>
-        <ul class="nav-links">
-            <li><a onclick="scrollToSection('hero')">Home</a></li>
-            <li><a onclick="scrollToSection('about')">About</a></li>
-            <li><a onclick="scrollToSection('services')">Services</a></li>
-            <li><a onclick="scrollToSection('faq')">FAQs</a></li>
-            <li><a onclick="scrollToSection('contact')">Contact</a></li>
-        </ul>
-    </nav>
+    <!-- Navigation -->
+<nav class="navbar">
+    <a href="#" class="logo">
+        <h4>💰Scan4Cash</h4>
+    </a>
+    
+    <!-- Desktop Navigation Links -->
+    <ul class="nav-links" id="navLinks">
+        <li><a onclick="scrollToSection('hero')">Home</a></li>
+        <li><a onclick="scrollToSection('about')">About</a></li>
+        <li><a onclick="scrollToSection('services')">Services</a></li>
+        <li><a onclick="scrollToSection('faq')">FAQs</a></li>
+        <li><a onclick="scrollToSection('contact')">Contact</a></li>
+    </ul>
+    
+    <!-- Mobile Hamburger Menu Button -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
 
     <!-- Hero Section with SINGLE IMAGE CAROUSEL -->
     <section id="hero" class="hero">
@@ -31,18 +41,19 @@
             
             <h1>Scan4Cash</h1>
 
-<div class="market-btn-container">
-    <button class="market-btn">💰 See Market Price</button>
-</div>
             <p class="tagline">Turn your waste into cash</p>
             <p class="quote">"Clean your space, fill your pocket.
                 Request pickup now!"</p>
             <button class="cta-button" onclick="openModal('registrationModal')">
                 <i class="fas fa-truck"></i> Request Pickup
             </button>
-
+           <!-- Market Price Button - Hidden initially -->
+            <button class="market-btn" id="marketBtn" onclick="openModal('marketModal')">
+                See Market Price
+            </button>
         </div>
-
+    </div>
+        </div>
 
         <!-- SINGLE RECTANGLE CAROUSEL -->
         <div class="hero-images">
@@ -70,7 +81,7 @@
             Instead of throwing plastic, metal, glass, or old clothes, users can
             upload their waste details and sell them to collectors. This reduces
             pollution, protects animals, and promotes recycling. 
-            <br>Minimum 500g required per submission.
+            <br><b>Minimum 500g required per submission.</b>
         </p>
 
         <div class="about-grid">
